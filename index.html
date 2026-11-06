@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#f4f3ef;color:#111110;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
@@ -57,8 +58,8 @@ img,video{max-width:100%}
 <!-- HOME -->
 <section id="page-home" class="page" style="max-width:1320px;margin:0 auto;padding:clamp(48px,9vw,120px) clamp(20px,5vw,56px) clamp(32px,5vw,56px)">
   <div data-fade style="display:flex;align-items:center;justify-content:center;gap:12px;font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:clamp(26px,3.6vw,42px);text-align:center"><span style="display:inline-block;width:28px;height:2px;background:#111110"></span>Sports physical therapy · Chattanooga &amp; North Georgia</div>
-  <div data-fade style="display:flex;justify-content:center;margin:0 0 clamp(22px,3.2vw,38px)">
-    <img id="heroLogo" src="assets/logo-black.png" alt="Athletix Lab Sports Therapy" style="width:min(100%,780px);height:auto;display:block">
+  <div style="display:flex;justify-content:center;margin:0 0 clamp(22px,3.2vw,38px)">
+    <div id="heroLogo" class="athletix-reveal" data-autoplay="load" data-delay="150" data-font="none" style="width:min(100%,780px)"></div>
   </div>
   <h1 style="margin:0;text-align:center;font-size:clamp(32px,6.2vw,92px);line-height:0.94;font-weight:900;font-style:italic;font-stretch:122%;letter-spacing:-0.025em;text-transform:uppercase">
     <span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-hero style="display:block">Back to your sport.</span></span>
@@ -245,6 +246,7 @@ img,video{max-width:100%}
 
 </div>
 
+<script src="assets/athletix-reveal.js" defer></script>
 <script>
 (function(){
   var PAGES = ['home','services','team','contact'];
