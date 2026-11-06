@@ -33,10 +33,9 @@ img,video{max-width:100%}
 <div style="min-height:100vh;display:flex;flex-direction:column;background:#f4f3ef;color:#111110;font-family:'Archivo',system-ui,sans-serif">
 
 <header style="position:sticky;top:0;z-index:50;background:rgba(244,243,239,0.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(17,17,16,0.1)">
-  <div style="max-width:1320px;margin:0 auto;height:72px;padding:0 clamp(20px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:24px">
-    <a href="#home" aria-label="Athletix Lab home" style="display:flex;align-items:center"><img src="assets/logo-black.png" alt="Athletix Lab Sports Therapy" style="height:clamp(44px,5.2vw,58px);width:auto;display:block"></a>
-    <nav class="nav-desktop" style="display:flex;align-items:center;gap:36px"></nav>
-    <button id="menuBtn" class="nav-mobile" onClick="toggleMenu()" style="display:none;height:44px;padding:0 16px;border:1.5px solid #111110;background:transparent;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;color:#111110">Menu</button>
+  <div style="max-width:1320px;margin:0 auto;height:72px;padding:0 clamp(20px,5vw,56px);display:flex;align-items:center;gap:24px">
+    <nav class="nav-desktop" style="display:flex;align-items:center;justify-content:space-between;flex:1;gap:36px"></nav>
+    <button id="menuBtn" class="nav-mobile" onClick="toggleMenu()" style="display:none;margin-left:auto;height:44px;padding:0 16px;border:1.5px solid #111110;background:transparent;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;color:#111110">Menu</button>
   </div>
 </header>
 
@@ -283,10 +282,11 @@ img,video{max-width:100%}
   function el(html){ var t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; }
 
   // Nav
-  var navHtml = '';
+  var navHtml = '<span style="display:flex;align-items:center;gap:36px">';
   NAV.forEach(function(n){
     navHtml += '<a href="#'+n[1]+'" data-nav="'+n[1]+'" style="position:relative;font-size:14px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:6px 0">'+n[0]+'<span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#111110;opacity:0;transition:opacity .2s"></span></a>';
   });
+  navHtml += '</span>';
   navHtml += '<a href="#contact" class="btn-arrow" style="display:flex;align-items:center;height:44px;padding:0 22px;background:#111110;color:#f4f3ef;font-size:14px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;transition:transform .2s">Book a visit</a>';
   document.querySelector('.nav-desktop').innerHTML = navHtml;
 
