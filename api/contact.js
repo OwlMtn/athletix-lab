@@ -20,7 +20,9 @@ export default async function handler(req, res) {
   const suspicious = /<script|javascript:|onerror=/i.test(name + phone + email + message);
   if (suspicious) return res.status(400).json({ ok: false, error: 'Invalid input' });
 
-  const to = CONTACT_TO || 'owlmountainstudios@gmail.com';
+  // Comma-separated list supported. Default = clinic owners (Pablo's request, 2026-11-06).
+  const to = (CONTACT_TO || 'pablo@theathletixlab.com,erica@theathletixlab.com,caldwell@theathletixlab.com')
+    .split(',').map(function (s) { return s.trim(); }).filter(Boolean);
   const from = 'Athletix Lab Website <onboarding@resend.dev>';
   const subject = `New appointment request — ${name} (${topic})`;
   const text = [
@@ -43,7 +45,7 @@ export default async function handler(req, res) {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from, to: [to], subject, text, html, reply_to: email || undefined }),
+      body: JSON.stringify({ from, to, subject, text, html, reply_to: email || undefined }),
     });
     if (!r.ok) {
       const errText = await r.text();
