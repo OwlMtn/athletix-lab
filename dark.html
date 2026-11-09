@@ -46,6 +46,12 @@ img,video{max-width:100%}
 .svc-card{background:var(--bg);padding:32px 28px 36px;display:flex;flex-direction:column;gap:20px;transition:background .2s;color:var(--ink)}
 .svc-card:hover{background:var(--card-hover);color:var(--ink)}
 .row{border-bottom:1px solid rgba(244,243,239,.18)}
+#partnersWrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,64px);align-items:start}
+@media (max-width:900px){#partnersWrap{grid-template-columns:1fr}}
+.partner{display:flex;flex-direction:column;justify-content:space-between;gap:28px;width:min(100%,320px);min-height:236px;padding:28px 26px 26px;border:1px solid var(--line);color:var(--ink);transition:background .2s,border-color .2s}
+.partner:hover{background:var(--card-hover);border-color:rgba(244,243,239,.3);color:var(--ink)}
+.partner .go{transition:transform .25s;display:inline-block}
+.partner:hover .go{transform:translateX(4px)}
 .lnk{color:var(--accent)}
 .lnk:hover{color:var(--hot)}
 #teamIntro{display:grid;grid-template-columns:minmax(0,540px) 1fr;gap:clamp(32px,5vw,64px);align-items:center}
@@ -151,6 +157,17 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
     </div>
   </div>
   <div style="display:flex;gap:16px;overflow-x:auto;padding-right:clamp(20px,5vw,48px);scroll-snap-type:x mandatory;scrollbar-width:none" id="reels"></div>
+</section>
+
+<section class="page-home-extra wrap" style="padding-bottom:clamp(72px,9vw,112px)">
+  <div id="partnersWrap">
+    <div data-reveal style="display:flex;flex-direction:column;gap:14px">
+      <span class="eyebrow" style="color:var(--dim)">Partners</span>
+      <h2 class="narrow" style="margin:0;font-size:clamp(40px,6vw,80px);line-height:0.9">Who we work with</h2>
+      <p style="margin:6px 0 0;font-size:16px;line-height:1.55;color:var(--muted);max-width:380px;text-wrap:pretty">Local partners we train, treat and refer alongside to get athletes back and keep them there.</p>
+    </div>
+    <div id="partners" style="display:flex;flex-wrap:wrap;gap:16px"></div>
+  </div>
 </section>
 
 <!-- SERVICES -->
@@ -308,6 +325,10 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
     ['Therapist name','PT, DPT · Title'],
     ['Therapist name','PT, DPT · Title']
   ];
+  // Partners — logo, link, one-line blurb. Add a row to add a partner.
+  var PARTNERS = [
+    ['Peak Kinetic Performance','https://peakkineticperformance.com/','media/partners/peak-kinetic-white.png','media/partners/peak-kinetic-white@2x.png','Sports performance training · Ringgold, GA','peakkineticperformance.com']
+  ];
   var REELS = [
     ['media/August-scaled.jpg','50% 50%','Return-to-sport testing'],
     ['media/June-40-scaled.jpg','40% 50%','Strength after surgery'],
@@ -361,6 +382,17 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
       '<span style="position:absolute;left:16px;bottom:16px;right:16px;color:#f4f3ef;font-size:15px;font-weight:700;line-height:1.3">'+r[2]+'</span></a>';
   });
   document.getElementById('reels').innerHTML = rl;
+
+  // Partners
+  var pt = '';
+  PARTNERS.forEach(function(p){
+    pt += '<a href="'+p[1]+'" target="_blank" rel="noopener" class="partner" data-reveal>' +
+      '<img src="'+p[2]+'" srcset="'+p[3]+' 2x" alt="'+p[0]+'" loading="lazy" style="height:76px;width:auto;display:block">' +
+      '<span style="display:flex;flex-direction:column;gap:6px"><span class="narrow" style="font-size:22px;line-height:1">'+p[0]+'</span>' +
+      '<span style="font-size:14px;line-height:1.5;color:#bdb9ae">'+p[4]+'</span>' +
+      '<span style="margin-top:8px;font:700 13px \'Archivo\',sans-serif;text-transform:uppercase;letter-spacing:.06em;color:'+accent+'">'+p[5]+' <span class="go">→</span></span></span></a>';
+  });
+  document.getElementById('partners').innerHTML = pt;
 
   // Services accordion (full list)
   function renderServices(){
