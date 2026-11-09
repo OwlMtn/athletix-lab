@@ -310,7 +310,7 @@ img,video{max-width:100%}
   ];
   // Partners — logo, link, one-line blurb. Add a row to add a partner.
   var PARTNERS = [
-    ['Peak Kinetic Performance','https://peakkineticperformance.com/','media/partners/peak-kinetic-black.png','media/partners/peak-kinetic-black@2x.png','Sports performance training · Ringgold, GA','peakkineticperformance.com']
+    ['Peak Kinetic Performance','https://peakkineticperformance.com/','media/partners/peak-kinetic-black.png','media/partners/peak-kinetic-black@2x.png','Sports performance training · Ringgold,&nbsp;GA','peakkineticperformance.com']
   ];
   var REELS = [
     ['media/August-scaled.jpg','50% 50%','Return-to-sport testing'],
@@ -383,7 +383,7 @@ img,video{max-width:100%}
       '<img src="'+p[2]+'" srcset="'+p[3]+' 2x" alt="'+p[0]+'" loading="lazy" style="height:76px;width:auto;display:block">' +
       '<span style="display:flex;flex-direction:column;gap:6px"><span style="font-size:22px;line-height:1;font-weight:800;font-stretch:110%;text-transform:uppercase;letter-spacing:0.01em">'+p[0]+'</span>' +
       '<span style="font-size:14px;line-height:1.5;color:#6b6a65">'+p[4]+'</span>' +
-      '<span style="margin-top:8px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid '+accent+';align-self:flex-start">'+p[5]+' <span class="go">→</span></span></span></a>';
+      '<span style="margin-top:8px;font-size:13px;font-weight:700;letter-spacing:.02em;white-space:nowrap;border-bottom:1.5px solid '+accent+';align-self:flex-start">'+p[5]+' <span class="go">→</span></span></span></a>';
   });
   document.getElementById('partners').innerHTML = pt;
 
