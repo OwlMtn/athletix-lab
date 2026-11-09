@@ -34,6 +34,11 @@ img,video{max-width:100%}
 #heroMedia{aspect-ratio:4/3}
 #heroMedia img{object-position:center 22%}
 @media (max-width:720px){#heroMedia{aspect-ratio:3/4}#heroMedia img{object-position:center}}
+#designToggle{position:fixed;right:14px;bottom:14px;z-index:300;display:flex;align-items:center;height:38px;padding:3px 3px 3px 14px;border-radius:999px;background:#111110;color:#f4f3ef;border:1px solid rgba(244,243,239,.22);box-shadow:0 8px 28px rgba(0,0,0,.35);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+#designToggle .lbl{color:#8d8c86;margin-right:10px}
+#designToggle a{display:flex;align-items:center;height:30px;padding:0 12px;border-radius:999px;color:#f4f3ef}
+#designToggle a:hover{color:#f4f3ef;background:rgba(244,243,239,.1)}
+#designToggle a.on,#designToggle a.on:hover{background:oklch(0.86 0.17 120);color:#111110}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -254,6 +259,12 @@ img,video{max-width:100%}
 
 </div>
 
+<div id="designToggle" role="group" aria-label="Design preview switch">
+  <span class="lbl">Design</span>
+  <a data-design="current" href="/" class="on">Current</a>
+  <a data-design="new" href="/dark">New</a>
+</div>
+
 <script src="assets/athletix-reveal.js" defer></script>
 <script>
 (function(){
@@ -393,6 +404,9 @@ img,video{max-width:100%}
     if (menuOpen) toggleMenu();
     window.scrollTo(0,0);
     setup();
+    document.querySelectorAll('#designToggle a').forEach(function(a){
+      a.href = (a.getAttribute('data-design') === 'current' ? '/' : '/dark') + location.hash;
+    });
   }
   window.addEventListener('hashchange', route);
 
