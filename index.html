@@ -496,6 +496,9 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
         var s = document.getElementById('sentMsg');
         s.style.display = 'flex';
         if (!res.ok) s.querySelector('p').innerHTML = 'Something went wrong sending your request. Please call us directly at <a href="tel:7064060021" style="font-weight:700;border-bottom:1.5px solid #121210">706-406-0021</a>.';
+        // Track the outcome, not just the attempt. Counting only successes
+        // would make a broken form look identical to a quiet week.
+        if (window.va) window.va('event', { name: res.ok ? 'request_submitted' : 'request_failed' });
       });
   });
 
@@ -503,5 +506,7 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
   route();
 })();
 </script>
+<!-- Vercel Web Analytics: cookieless, no consent banner required. -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
