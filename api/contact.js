@@ -1,5 +1,13 @@
 // Athletix Lab — contact form handler (Vercel serverless function)
-// Sends appointment requests via Resend. Env: RESEND_API_KEY, CONTACT_TO (optional, defaults to site owner).
+// Sends appointment requests via Resend.
+// Env: RESEND_API_KEY, CONTACT_TO (optional), CONTACT_FROM (optional).
+//
+// CONTACT_FROM exists so the sending identity can move to the clinic's own
+// verified domain without a code change. Resend's shared onboarding@resend.dev
+// sender only ever delivers to the Resend account owner, so while it is in use
+// the clinic's own staff addresses CANNOT receive form mail. Once
+// send.theathletixlab.com verifies, set CONTACT_FROM and CONTACT_TO and
+// redeploy - no edit here.
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -7,7 +15,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });
 
-  const { RESEND_API_KEY, CONTACT_TO } = process.env;
+  const { RESEND_API_KEY, CONTACT_TO, CONTACT_FROM } = process.env;
   if (!RESEND_API_KEY) return res.status(500).json({ ok: false, error: 'Email service not configured' });
 
   // Basic validation + sanitize
@@ -23,7 +31,7 @@ export default async function handler(req, res) {
   // Comma-separated list supported. Default = clinic owners (Pablo's request, 2026-11-06).
   const to = (CONTACT_TO || 'pablo@theathletixlab.com,erica@theathletixlab.com,caldwell@theathletixlab.com')
     .split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-  const from = 'Athletix Lab Website <onboarding@resend.dev>';
+  const from = CONTACT_FROM || 'Athletix Lab Website <onboarding@resend.dev>';
   const subject = `New appointment request — ${name} (${topic})`;
   const text = [
     `New appointment request from theathletixlab website:`,
