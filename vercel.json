@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/dark",
-      "destination": "/dark.html"
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
