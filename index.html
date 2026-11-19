@@ -290,7 +290,10 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
 <script>
 (function(){
   var PAGES = ['home','services','team','contact'];
-  var NAV_DESK = [['Services','services'],['Team','team'],['Contact','contact']];
+  // Home belongs here. The header logo was removed in November (it duplicated the
+  // hero logo on the home page), which also removed the only way back to Home from
+  // a subpage on desktop -- mobile still had it via NAV_ALL. Reported by Bo 2026-11-19.
+  var NAV_DESK = [['Home','home'],['Services','services'],['Team','team'],['Contact','contact']];
   var NAV_ALL = [['Home','home'],['Services','services'],['Team','team'],['Contact','contact']];
   // Home-page highlights — exactly the six from Bo's Claude Design export
   var HOME_SVC = [
