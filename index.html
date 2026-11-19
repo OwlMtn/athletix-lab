@@ -182,7 +182,7 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
   <div class="eyebrow" data-fade style="margin-bottom:24px">Who you'll work with</div>
   <h1 class="narrow" style="margin:0;font-size:clamp(56px,11vw,140px);line-height:0.86;letter-spacing:-.02em"><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-hero style="display:block">The team</span></span></h1>
   <p data-fade style="margin:clamp(28px,4vw,48px) 0 clamp(48px,6vw,80px);font-size:18px;line-height:1.55;max-width:560px;color:var(--muted2);text-wrap:pretty">Our therapists bring decades of combined experience in sports and orthopedic physical therapy. Every visit is one-on-one with a licensed therapist.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:40px 24px" id="teamGrid"></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),360px));gap:40px 24px" id="teamGrid"></div>
 </section>
 
 <!-- CONTACT -->
@@ -317,10 +317,11 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
     ['Treat','Hands-on care and exercise built around your sport and schedule.'],
     ['Return','Progress back to full training with a plan to stay there.']
   ];
+  // [name, credential line, photo basename]. Leave the photo empty to keep the
+  // striped placeholder card for a therapist whose headshot hasn't arrived.
   var TEAM = [
-    ['Therapist name','PT, DPT · Title'],
-    ['Therapist name','PT, DPT · Title'],
-    ['Therapist name','PT, DPT · Title']
+    ['Pablo Alvarez','Physical Therapist','team-pablo'],
+    ['Erica Butler','Physical Therapist','team-erica']
   ];
   // Partners — [name, url, logo svg, blurb, display url]. Add a row to add a partner.
   var PARTNERS = [
@@ -414,7 +415,10 @@ input:-webkit-autofill,textarea:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px
   // Team
   var tm = '';
   TEAM.forEach(function(t){
-    tm += '<div data-reveal style="display:flex;flex-direction:column;gap:16px"><div style="aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#1e1d1a 0 10px,#232220 10px 20px);display:flex;align-items:flex-end;padding:18px;font-family:\'IBM Plex Mono\',monospace;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:#9a968c">Headshot · 4:5</div><div style="display:flex;flex-direction:column;gap:4px"><span class="narrow" style="font-size:28px;line-height:1">'+t[0]+'</span><span style="font-size:15px;color:#bdb9ae">'+t[1]+'</span></div></div>';
+    var portrait = t[2]
+      ? '<img src="media/'+t[2]+'.jpg" srcset="media/'+t[2]+'-500.jpg 500w, media/'+t[2]+'.jpg 1000w" sizes="(max-width:720px) 100vw, 320px" alt="'+t[0]+', '+t[1]+' at Athletix Lab" loading="lazy" decoding="async" style="display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#1e1d1a">'
+      : '<div style="aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#1e1d1a 0 10px,#232220 10px 20px);display:flex;align-items:flex-end;padding:18px;font-family:\'IBM Plex Mono\',monospace;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:#9a968c">Headshot · 4:5</div>';
+    tm += '<div data-reveal style="display:flex;flex-direction:column;gap:16px">'+portrait+'<div style="display:flex;flex-direction:column;gap:4px"><span class="narrow" style="font-size:28px;line-height:1">'+t[0]+'</span><span style="font-size:15px;color:#bdb9ae">'+t[1]+'</span></div></div>';
   });
   document.getElementById('teamGrid').innerHTML = tm;
 
